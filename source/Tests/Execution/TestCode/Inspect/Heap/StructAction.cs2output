@@ -1,0 +1,21 @@
+using System;
+
+public static class Program {
+    public static void Main(){
+        MyObject mo = new MyObject();
+        Inspect.Heap(mo);
+    }
+}
+
+public sealed class MyObject
+{
+    private Foo _core = new Foo();
+}
+
+public struct Foo { 
+    public Action<object> _action;
+}
+
+#=>
+
+#{"type":"inspection:memory","title":"MyObject at 0x<IGNORE>","labels":[{"name":"header","offset":0,"length":8},{"name":"type handle","offset":8,"length":8},{"name":"_core","offset":16,"length":8,"nested":[{"name":"_action","offset":16,"length":8}]}],"data":[0,0,0,0,0,0,0,0,<IGNORE>,<IGNORE>,<IGNORE>,<IGNORE>,<IGNORE>,<IGNORE>,<IGNORE>,<IGNORE>,0,0,0,0,0,0,0,0]}
